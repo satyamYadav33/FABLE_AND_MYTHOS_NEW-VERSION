@@ -1,0 +1,263 @@
+import { BenchmarkItem, PricingTier, SafeguardFeature } from '../types';
+
+export const BENCHMARKS: BenchmarkItem[] = [
+  {
+    id: 'swe-bench-pro',
+    name: 'SWE-bench Pro',
+    category: 'coding',
+    description: 'Autonomous multi-file software engineering in production codebases',
+    metric: 'Resolved %',
+    fable51: 82.4,
+    mythos51: 82.6,
+    fable5: 80.0,
+    opus5: 72.8,
+    gpt56Sol: 78.5,
+    gemini25Ultra: 75.2,
+    unit: '%',
+    higherIsBetter: true,
+    notes: 'Claude Mythos and Fable 5.1 lead the industry in real-world issue resolution.'
+  },
+  {
+    id: 'cursor-bench',
+    name: 'CursorBench 3.2.0',
+    category: 'coding',
+    description: 'Agentic code editor integration and IDE command execution',
+    metric: 'Accuracy %',
+    fable51: 73.4,
+    mythos51: 73.6,
+    fable5: 65.1,
+    opus5: 61.2,
+    gpt56Sol: 68.9,
+    gemini25Ultra: 64.0,
+    unit: '%',
+    higherIsBetter: true,
+    notes: '+8.3% leap over Fable 5 in autonomous editing precision.'
+  },
+  {
+    id: 'livecodebench',
+    name: 'LiveCodeBench',
+    category: 'coding',
+    description: 'Contamination-free competitive programming problems (Post-2025)',
+    metric: 'Pass@1 %',
+    fable51: 90.5,
+    mythos51: 90.8,
+    fable5: 85.2,
+    opus5: 79.4,
+    gpt56Sol: 86.1,
+    gemini25Ultra: 82.3,
+    unit: '%',
+    higherIsBetter: true,
+  },
+  {
+    id: 'terminal-bench',
+    name: 'Terminal-Bench 4.0',
+    category: 'agents',
+    description: 'Complex shell interactions, multi-step environment configuration & debugging',
+    metric: 'Task Success %',
+    fable51: 55.8,
+    mythos51: 56.4,
+    fable5: 42.0,
+    opus5: 52.3,
+    gpt56Sol: 47.6,
+    gemini25Ultra: 44.1,
+    unit: '%',
+    higherIsBetter: true,
+    notes: 'Substantial +13.8% increase in long-running CLI navigation and self-correction.'
+  },
+  {
+    id: 'gdpval-aa',
+    name: 'GDPval-AA v2',
+    category: 'knowledge',
+    description: 'Economically valuable professional knowledge-work tasks across 44 professions',
+    metric: 'Arena Elo',
+    fable51: 1853,
+    mythos51: 1860,
+    fable5: 1782,
+    opus5: 1740,
+    gpt56Sol: 1795,
+    gemini25Ultra: 1760,
+    unit: 'Elo',
+    higherIsBetter: true,
+    notes: 'First frontier model to breach 1850 Elo on multi-step enterprise workflows.'
+  },
+  {
+    id: 'automation-bench',
+    name: 'AutomationBench',
+    category: 'agents',
+    description: 'End-to-end multi-application business workflows and integration scripts',
+    metric: 'Completion %',
+    fable51: 31.4,
+    mythos51: 32.1,
+    fable5: 22.8,
+    opus5: 26.5,
+    gpt56Sol: 27.2,
+    gemini25Ultra: 24.0,
+    unit: '%',
+    higherIsBetter: true,
+    notes: 'Evaluates resilience across 100+ simulated enterprise ERP and CRM toolchains.'
+  },
+  {
+    id: 'terminal-bench-sci',
+    name: 'Terminal-Bench-Science 0.1',
+    category: 'science',
+    description: 'Agentic computational biology, chemistry simulation, and data pipelines',
+    metric: 'Pipeline Success %',
+    fable51: 52.6,
+    mythos51: 58.9,
+    fable5: 39.4,
+    opus5: 44.1,
+    gpt56Sol: 45.0,
+    gemini25Ultra: 41.8,
+    unit: '%',
+    higherIsBetter: true,
+    notes: 'Mythos 5.1 achieves 58.9% with specialized biological tooling access.'
+  },
+  {
+    id: 'mmlu-pro',
+    name: 'MMLU Pro',
+    category: 'reasoning',
+    description: 'Rigorous multi-discipline reasoning across STEM, medicine, law, and humanities',
+    metric: 'Accuracy %',
+    fable51: 92.4,
+    mythos51: 92.6,
+    fable5: 89.1,
+    opus5: 87.2,
+    gpt56Sol: 90.3,
+    gemini25Ultra: 88.5,
+    unit: '%',
+    higherIsBetter: true,
+  },
+  {
+    id: 'mmmu-pro',
+    name: 'MMMU Pro (Vision)',
+    category: 'reasoning',
+    description: 'Multi-discipline multimodal reasoning and diagram interpretation',
+    metric: 'Accuracy %',
+    fable51: 90.6,
+    mythos51: 90.8,
+    fable5: 84.7,
+    opus5: 82.5,
+    gpt56Sol: 86.8,
+    gemini25Ultra: 85.1,
+    unit: '%',
+    higherIsBetter: true,
+  },
+  {
+    id: 'medscribe',
+    name: 'MedScribe Clinical',
+    category: 'knowledge',
+    description: 'Clinical documentation synthesis and medical protocol validation',
+    metric: 'Expert Agreement %',
+    fable51: 91.3,
+    mythos51: 91.5,
+    fable5: 86.4,
+    opus5: 85.0,
+    gpt56Sol: 88.2,
+    gemini25Ultra: 86.7,
+    unit: '%',
+    higherIsBetter: true,
+  },
+  {
+    id: 'legal-research',
+    name: 'Legal Research Bench',
+    category: 'knowledge',
+    description: 'Precedent extraction, brief analysis, and multi-jurisdiction statutory synthesis',
+    metric: 'F1 Accuracy %',
+    fable51: 55.3,
+    mythos51: 55.4,
+    fable5: 50.1,
+    opus5: 55.3,
+    gpt56Sol: 52.0,
+    gemini25Ultra: 49.5,
+    unit: '%',
+    higherIsBetter: true,
+  },
+  {
+    id: 'hle',
+    name: "Humanity's Last Exam",
+    category: 'reasoning',
+    description: 'Extreme frontier difficulty multidisciplinary academic benchmark',
+    metric: 'Accuracy %',
+    fable51: 24.8,
+    mythos51: 25.6,
+    fable5: 16.2,
+    opus5: 14.8,
+    gpt56Sol: 20.4,
+    gemini25Ultra: 18.0,
+    unit: '%',
+    higherIsBetter: true,
+    notes: 'Significant breakthrough on PhD-level non-Googleable scientific inquiries.'
+  }
+];
+
+export const PRICING_DATA: PricingTier[] = [
+  {
+    model: 'Claude Fable 5.1',
+    inputPerMillion: 3.00,
+    cacheWritePerMillion: 3.75,
+    cacheReadPerMillion: 0.30, // 75% cheaper than prior generation cache read ($1.25 -> $0.30)
+    outputPerMillion: 15.00,
+    contextWindow: '200K / 1M (Enterprise)',
+    maxOutput: '64K tokens'
+  },
+  {
+    model: 'Claude Mythos 5.1 (Restricted)',
+    inputPerMillion: 4.50,
+    cacheWritePerMillion: 5.60,
+    cacheReadPerMillion: 0.45,
+    outputPerMillion: 22.50,
+    contextWindow: '200K / 1M (Enterprise)',
+    maxOutput: '64K tokens'
+  },
+  {
+    model: 'Claude Fable 5 (Previous Gen)',
+    inputPerMillion: 3.00,
+    cacheWritePerMillion: 3.75,
+    cacheReadPerMillion: 1.25,
+    outputPerMillion: 15.00,
+    contextWindow: '200K tokens',
+    maxOutput: '32K tokens'
+  },
+  {
+    model: 'Claude Opus 5',
+    inputPerMillion: 15.00,
+    cacheWritePerMillion: 18.75,
+    cacheReadPerMillion: 1.50,
+    outputPerMillion: 75.00,
+    contextWindow: '200K tokens',
+    maxOutput: '16K tokens'
+  }
+];
+
+export const SAFEGUARD_COMPARISON: SafeguardFeature[] = [
+  {
+    title: 'Access & Eligibility',
+    fable51: 'Generally Available (Pro, Max, Team, Enterprise, Cloud Partners)',
+    mythos51: 'Restricted Access (Vetted US life science & defensive cyber organizations)',
+    description: 'Fable 5.1 provides enterprise-safe capabilities out of the box, while Mythos 5.1 requires organization vetting.'
+  },
+  {
+    title: 'Cybersecurity Guardrails',
+    fable51: 'Vulnerability discovery enabled for defensive audits; exploit creation constrained. 60% fewer false positives.',
+    mythos51: 'Full-spectrum vulnerability analysis, binary reversing, and autonomous red-team testing in isolated sandboxes.',
+    description: 'Fable 5.1 protects developer productivity by distinguishing benign security auditing from weaponized exploits.'
+  },
+  {
+    title: 'Biology & Life Sciences (RSP)',
+    fable51: 'Standard biological safety filters; hazardous biological agent synthesis queries rerouted or blocked.',
+    mythos51: 'Full molecular design, high-affinity protein binder synthesis, biological deep learning (CB-1 vetted tier).',
+    description: 'Under Anthropic’s Responsible Scaling Policy, advanced biological synthesis is gated behind the Life Sciences Verification Program.'
+  },
+  {
+    title: 'Enterprise Frontier Safeguards (EFS)',
+    fable51: 'Full EFS compatibility: Zero Data Retention (ZDR) and customer-controlled cloud VPC monitoring.',
+    mythos51: 'Mandatory isolated VPC execution with cryptographic audit logs and mutual attestation.',
+    description: 'Ensures sensitive proprietary code, IP, and research data remain strictly inside client trust boundaries.'
+  },
+  {
+    title: 'Watermarking & Provenance',
+    fable51: 'Invisible statistical text watermarking with private preview verification API for enterprise compliance.',
+    mythos51: 'Cryptographically signed audit trail for every generated artifact and code snippet.',
+    description: 'State-of-the-art provenance mechanisms that resist paraphrasing while maintaining zero degradation in text fluency.'
+  }
+];
