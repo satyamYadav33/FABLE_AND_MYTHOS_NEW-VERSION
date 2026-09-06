@@ -33,63 +33,65 @@ export const CostCalculator: React.FC = () => {
   const savingsPercent = Math.round(((monthlyCostFable5 - monthlyCostFable51) / monthlyCostFable5) * 100);
 
   return (
-    <section id="pricing" className="py-12 border-b border-gray-200">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+    <section id="pricing" className="py-12 border-b border-[var(--clay-border)]">
+      <div className="max-w-4xl mx-auto px-2 sm:px-4">
         
         {/* Section Header */}
         <div className="mb-8">
-          <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-gray-400 mb-2">
+          <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--clay-text-muted)] mb-2">
             Token Economics & Prompt Caching
           </div>
-          <h2 className="text-3xl sm:text-4xl font-serif text-[#111] mb-4">
+          <h2 className="text-3xl sm:text-4xl font-serif text-[var(--clay-text-primary)] mb-4">
             75% Reduction in Cache Read Costs
           </h2>
-          <p className="font-serif-editorial text-lg text-[#2c2c2c] leading-[1.65]">
+          <p className="font-serif-editorial text-lg text-[var(--clay-text-secondary)] leading-[1.7]">
             With Claude Fable 5.1, we have cut the cost of reading from prompt cache by 75% ($0.30/MTok vs $1.25/MTok previously). For iterative coding agents and long-context knowledge retrieval, this reduces total end-to-end workload costs by up to 45%.
           </p>
         </div>
 
-        {/* Pricing Matrix Table */}
-        <div className="bg-[#ffffff] rounded-2xl border border-gray-200 overflow-hidden mb-8">
-          <div className="p-4 bg-[#f9f8f4] border-b border-gray-200 flex items-center justify-between">
-            <span className="font-bold text-xs text-[#111] uppercase tracking-wider">
+        {/* Pricing Matrix Table in Clay Card */}
+        <div className="clay-card rounded-[2.2rem] overflow-hidden mb-8">
+          <div className="p-4 sm:p-5 clay-inset border-b border-[var(--clay-border)] flex items-center justify-between">
+            <span className="font-bold text-xs text-[var(--clay-text-primary)] uppercase tracking-wider">
               API Pricing (USD per Million Tokens)
             </span>
-            <span className="text-[11px] font-mono text-gray-400">Effective September 1, 2026</span>
+            <span className="text-[11px] font-mono text-[var(--clay-text-muted)]">Effective September 1, 2026</span>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs font-mono">
-              <thead className="bg-[#f9f8f4] border-b border-gray-200 text-gray-600 font-bold uppercase text-[10px] tracking-wider">
+              <thead className="clay-inset border-b border-[var(--clay-border)] text-[var(--clay-text-muted)] font-bold uppercase text-[10px] tracking-wider">
                 <tr>
-                  <th className="p-3.5 pl-4 font-sans font-bold">Model</th>
+                  <th className="p-3.5 pl-5 font-sans font-bold">Model</th>
                   <th className="p-3.5">Prompt Input</th>
-                  <th className="p-3.5">Cache Write (5m)</th>
-                  <th className="p-3.5 font-bold text-[#111] bg-[#f2efe9]">Cache Read</th>
+                  <th className="p-3.5">Cache Write</th>
+                  <th className="p-3.5 font-bold text-[var(--clay-accent)]">Cache Read</th>
                   <th className="p-3.5">Output Tokens</th>
-                  <th className="p-3.5 pr-4">Context / Max Out</th>
+                  <th className="p-3.5 pr-5">Context Window</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200 text-gray-600">
+              <tbody className="divide-y divide-[var(--clay-border)] text-[var(--clay-text-secondary)]">
                 {PRICING_DATA.map((tier, idx) => (
                   <tr 
                     key={idx} 
-                    className={tier.model.includes('5.1') ? 'bg-[#f2efe9]/40 font-medium' : 'hover:bg-[#f9f8f4]'}
+                    className={tier.model.includes('5.1') ? 'bg-[var(--clay-accent)]/5 font-semibold text-[var(--clay-text-primary)]' : 'hover:bg-[var(--clay-surface-elevated)]/40'}
                   >
-                    <td className="p-3.5 pl-4 font-sans font-semibold text-[#111] flex items-center space-x-2">
-                      {tier.model.includes('5.1') && <span className="w-1.5 h-1.5 rounded-full bg-[#1b1b1b]"></span>}
+                    <td className="p-3.5 pl-5 font-sans font-semibold text-[var(--clay-text-primary)] flex items-center space-x-2">
+                      {tier.model.includes('5.1') && <span className="w-2 h-2 rounded-full bg-[var(--clay-accent)]"></span>}
                       <span>{tier.model}</span>
                     </td>
                     <td className="p-3.5">${tier.inputPerMillion.toFixed(2)}</td>
                     <td className="p-3.5">${tier.cacheWritePerMillion.toFixed(2)}</td>
-                    <td className="p-3.5 font-bold text-[#111] bg-[#f2efe9]/70">
+                    <td className={`p-3.5 font-bold ${tier.model.includes('5.1') ? 'text-[var(--clay-accent)]' : ''}`}>
                       ${tier.cacheReadPerMillion.toFixed(2)}
-                      {tier.model === 'Claude Fable 5.1' && (
-                        <span className="ml-1 text-[10px] text-emerald-700 font-sans font-bold">(-75%)</span>
+                      {tier.model.includes('5.1') && (
+                        <span className="ml-1.5 text-[9px] px-1.5 py-0.5 rounded-full clay-badge text-[var(--clay-accent)] uppercase">
+                          -75%
+                        </span>
                       )}
                     </td>
                     <td className="p-3.5">${tier.outputPerMillion.toFixed(2)}</td>
-                    <td className="p-3.5 pr-4 text-gray-400 text-[11px]">{tier.contextWindow}</td>
+                    <td className="p-3.5 pr-5 font-sans text-xs">{tier.contextWindow}</td>
                   </tr>
                 ))}
               </tbody>
@@ -97,125 +99,103 @@ export const CostCalculator: React.FC = () => {
           </div>
         </div>
 
-        {/* Interactive Caching Savings Calculator */}
-        <div className="bg-[#ffffff] rounded-2xl border border-gray-200 p-6">
-          <div className="flex items-center space-x-2 text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">
-            <Calculator className="w-3.5 h-3.5 text-black" />
-            <span>Interactive Agentic Workload Calculator</span>
+        {/* Interactive Workload Savings Calculator in Clay Card */}
+        <div className="clay-card rounded-[2.2rem] p-6 sm:p-8">
+          <div className="flex items-center space-x-2.5 mb-6">
+            <div className="w-9 h-9 rounded-2xl clay-elevated text-[var(--clay-accent)] flex items-center justify-center">
+              <Calculator className="w-4 h-4" />
+            </div>
+            <div>
+              <h3 className="font-bold text-lg text-[var(--clay-text-primary)]">Agentic Workload Cost Simulator</h3>
+              <p className="text-xs text-[var(--clay-text-muted)]">Model the economic impact of the 75% prompt cache reduction on your stack.</p>
+            </div>
           </div>
-          <h3 className="text-xl font-bold font-serif text-[#111] mb-6">
-            Estimate Your Savings with 75% Cache Read Discount
-          </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
-            {/* Sliders Form */}
-            <div className="space-y-5 text-xs text-[#2c2c2c]">
+            {/* Controls */}
+            <div className="lg:col-span-7 space-y-5">
               
-              {/* Context Size */}
-              <div>
-                <div className="flex justify-between font-medium mb-1.5">
-                  <span>Context Size per Call:</span>
-                  <span className="font-mono font-bold text-[#111]">{contextSizeK}k tokens</span>
+              {/* Context Size Slider */}
+              <div className="p-4 rounded-2xl clay-inset">
+                <div className="flex justify-between text-xs mb-2">
+                  <span className="font-bold text-[var(--clay-text-primary)]">Codebase Context Size:</span>
+                  <span className="font-mono text-[var(--clay-accent)] font-bold">{contextSizeK}k tokens</span>
                 </div>
-                <input 
-                  type="range" 
-                  min="10" 
-                  max="200" 
+                <input
+                  type="range"
+                  min="20"
+                  max="200"
                   step="10"
-                  value={contextSizeK} 
+                  value={contextSizeK}
                   onChange={(e) => setContextSizeK(Number(e.target.value))}
-                  className="w-full accent-[#1b1b1b] cursor-pointer"
+                  className="w-full accent-[var(--clay-accent)] cursor-pointer"
                 />
-                <div className="flex justify-between text-[10px] text-gray-400 mt-1">
-                  <span>10k (Small Repo)</span>
-                  <span>100k (Full Workspace)</span>
-                  <span>200k (Enterprise Monorepo)</span>
-                </div>
               </div>
 
-              {/* Cache Hit Rate */}
-              <div>
-                <div className="flex justify-between font-medium mb-1.5">
-                  <span>Prompt Cache Hit Ratio:</span>
-                  <span className="font-mono font-bold text-[#111]">{cacheHitRate}%</span>
+              {/* Cache Hit Rate Slider */}
+              <div className="p-4 rounded-2xl clay-inset">
+                <div className="flex justify-between text-xs mb-2">
+                  <span className="font-bold text-[var(--clay-text-primary)]">Agent Cache Hit Rate:</span>
+                  <span className="font-mono text-[var(--clay-accent)] font-bold">{cacheHitRate}%</span>
                 </div>
-                <input 
-                  type="range" 
-                  min="0" 
-                  max="95" 
-                  step="5"
-                  value={cacheHitRate} 
+                <input
+                  type="range"
+                  min="50"
+                  max="98"
+                  step="1"
+                  value={cacheHitRate}
                   onChange={(e) => setCacheHitRate(Number(e.target.value))}
-                  className="w-full accent-[#1b1b1b] cursor-pointer"
+                  className="w-full accent-[var(--clay-accent)] cursor-pointer"
                 />
-                <div className="flex justify-between text-[10px] text-gray-400 mt-1">
-                  <span>0% (No Caching)</span>
-                  <span>50% (Standard)</span>
-                  <span>85%+ (Agent Loop)</span>
-                </div>
               </div>
 
-              {/* Requests Per Day */}
-              <div>
-                <div className="flex justify-between font-medium mb-1.5">
-                  <span>Requests / Agent Turns per Day:</span>
-                  <span className="font-mono font-bold text-[#111]">{requestsPerDay}</span>
+              {/* Daily Requests Slider */}
+              <div className="p-4 rounded-2xl clay-inset">
+                <div className="flex justify-between text-xs mb-2">
+                  <span className="font-bold text-[var(--clay-text-primary)]">Agent Invocations / Day:</span>
+                  <span className="font-mono text-[var(--clay-accent)] font-bold">{requestsPerDay}</span>
                 </div>
-                <input 
-                  type="range" 
-                  min="50" 
-                  max="5000" 
+                <input
+                  type="range"
+                  min="100"
+                  max="2500"
                   step="50"
-                  value={requestsPerDay} 
+                  value={requestsPerDay}
                   onChange={(e) => setRequestsPerDay(Number(e.target.value))}
-                  className="w-full accent-[#1b1b1b] cursor-pointer"
+                  className="w-full accent-[var(--clay-accent)] cursor-pointer"
                 />
               </div>
 
             </div>
 
-            {/* Calculated Output Card */}
-            <div className="bg-[#f9f8f4] p-5 rounded-xl border border-gray-200 flex flex-col justify-between">
-              <div>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500 block mb-1">
-                  Projected Monthly Cost Comparison
-                </span>
-                
-                <div className="grid grid-cols-2 gap-3 my-4">
-                  <div className="p-3.5 rounded-xl bg-[#ffffff] border border-gray-200">
-                    <div className="text-[10px] uppercase font-bold text-gray-400">Claude Fable 5</div>
-                    <div className="text-base font-mono font-semibold text-gray-400 line-through mt-0.5">
-                      ${monthlyCostFable5.toLocaleString('en-US', { maximumFractionDigits: 0 })}
-                    </div>
-                  </div>
+            {/* Savings Result Card */}
+            <div className="lg:col-span-5 p-6 rounded-3xl clay-card text-center space-y-4">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--clay-text-muted)] block">
+                Estimated Monthly Savings
+              </span>
 
-                  <div className="p-3.5 rounded-xl bg-[#1b1b1b] border border-gray-800 text-white">
-                    <div className="text-[10px] uppercase font-bold text-gray-400">Claude Fable 5.1</div>
-                    <div className="text-lg font-mono font-bold text-white mt-0.5">
-                      ${monthlyCostFable51.toLocaleString('en-US', { maximumFractionDigits: 0 })}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-3.5 rounded-xl bg-[#ffffff] border border-gray-200 text-xs text-[#111] flex items-center justify-between">
-                  <div className="flex items-center space-x-1.5">
-                    <TrendingDown className="w-4 h-4 text-black" />
-                    <span className="font-semibold">Total Net Savings:</span>
-                  </div>
-                  <span className="font-mono font-bold text-sm text-[#111]">
-                    -${monthlySavings.toLocaleString('en-US', { maximumFractionDigits: 0 })}/mo ({savingsPercent}%)
-                  </span>
-                </div>
+              <div className="text-4xl sm:text-5xl font-mono font-bold text-emerald-500">
+                ${Math.round(monthlySavings).toLocaleString()}
               </div>
 
-              <p className="text-[11px] text-gray-400 mt-4 pt-3 border-t border-gray-200">
-                Calculated with 30 days/month active agent usage. Cached prompt reads are billed at $0.30 per million tokens.
-              </p>
+              <div className="inline-block px-3 py-1 rounded-full clay-badge text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                {savingsPercent}% Total Workload Reduction
+              </div>
+
+              <div className="border-t border-[var(--clay-border)] pt-3 text-xs space-y-1.5 text-[var(--clay-text-muted)] text-left">
+                <div className="flex justify-between">
+                  <span>Prior Generation Fable 5:</span>
+                  <span className="font-mono text-[var(--clay-text-primary)] font-semibold">${Math.round(monthlyCostFable5).toLocaleString()}/mo</span>
+                </div>
+                <div className="flex justify-between font-bold text-[var(--clay-text-primary)]">
+                  <span>Claude Fable 5.1:</span>
+                  <span className="font-mono text-[var(--clay-accent)]">${Math.round(monthlyCostFable51).toLocaleString()}/mo</span>
+                </div>
+              </div>
             </div>
 
           </div>
-
         </div>
 
       </div>

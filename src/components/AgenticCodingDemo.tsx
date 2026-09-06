@@ -66,7 +66,6 @@ const DEMO_STEPS: LogStep[] = [
 
 export const AgenticCodingDemo: React.FC = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const [autoPlay, setAutoPlay] = useState(false);
 
   const nextStep = () => {
     setActiveStep((prev) => (prev + 1) % DEMO_STEPS.length);
@@ -74,139 +73,108 @@ export const AgenticCodingDemo: React.FC = () => {
 
   const reset = () => {
     setActiveStep(0);
-    setAutoPlay(false);
   };
 
   const step = DEMO_STEPS[activeStep];
 
   return (
-    <section id="coding-agents" className="py-12 border-b border-gray-200">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+    <section id="coding-agents" className="py-12 border-b border-[var(--clay-border)]">
+      <div className="max-w-4xl mx-auto px-2 sm:px-4">
         
         {/* Section Header */}
         <div className="mb-8">
-          <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-gray-400 mb-2">
+          <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--clay-text-muted)] mb-2">
             Autonomous Software Engineering
           </div>
-          <h2 className="text-3xl sm:text-4xl font-serif text-[#111] mb-4">
+          <h2 className="text-3xl sm:text-4xl font-serif text-[var(--clay-text-primary)] mb-4">
             Built for Multi-Day Autonomous Problem Solving
           </h2>
-          <p className="font-serif-editorial text-lg text-[#2c2c2c] leading-[1.65]">
+          <p className="font-serif-editorial text-lg text-[var(--clay-text-secondary)] leading-[1.7]">
             Claude Fable 5.1 is engineered for sustained agentic execution. It can maintain context across extensive multi-hour sessions, create its own automated tests, discover code vulnerabilities, and inspect visual UI outputs with multimodal vision.
           </p>
         </div>
 
-        {/* Interactive Terminal Demo */}
-        <div className="bg-[#141414] text-[#fafafa] rounded-2xl border border-gray-800 overflow-hidden shadow-xl mb-8">
+        {/* Interactive Terminal Demo with Claymorphic Frame */}
+        <div className="clay-card rounded-[2.2rem] overflow-hidden shadow-2xl mb-8 p-3 sm:p-5">
           
-          {/* Terminal Window Chrome */}
-          <div className="bg-[#1b1b1b] px-4 py-3 border-b border-gray-800 flex items-center justify-between">
+          {/* Terminal Window Header Bar */}
+          <div className="px-4 py-3 rounded-2xl clay-inset flex items-center justify-between mb-4">
             <div className="flex items-center space-x-2">
-              <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-              <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-              <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
-              <span className="ml-2 font-mono text-xs text-gray-400">
-                claude-code — session: fable-5-1-agent
+              <div className="w-3 h-3 rounded-full bg-rose-500 shadow-inner"></div>
+              <div className="w-3 h-3 rounded-full bg-amber-400 shadow-inner"></div>
+              <div className="w-3 h-3 rounded-full bg-emerald-500 shadow-inner"></div>
+              <span className="ml-2 text-xs font-mono text-[var(--clay-text-muted)] flex items-center space-x-1">
+                <Terminal className="w-3.5 h-3.5 text-[var(--clay-accent)]" />
+                <span>claude-code-session — v5.1.0-agent</span>
               </span>
             </div>
 
             <div className="flex items-center space-x-2">
-              <button
-                onClick={reset}
-                className="p-1 text-gray-400 hover:text-white transition-colors rounded hover:bg-gray-800"
-                title="Reset simulation"
-              >
-                <RotateCcw className="w-3.5 h-3.5" />
-              </button>
-              <button
-                onClick={nextStep}
-                className="flex items-center space-x-1.5 px-3 py-1 rounded bg-[#ffffff] text-[#111] text-xs font-bold hover:bg-gray-200 transition-colors"
-              >
-                <span>Next Step ({activeStep + 1}/{DEMO_STEPS.length})</span>
-                <ArrowRight className="w-3 h-3" />
-              </button>
+              <span className="px-2.5 py-0.5 rounded-full clay-badge text-[10px] font-mono text-emerald-500 font-bold">
+                Closed-Loop Active
+              </span>
             </div>
           </div>
 
-          {/* Stepper Tabs */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 border-b border-gray-800 bg-[#171717] text-xs font-mono">
+          {/* Stepper Navigation Buttons */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
             {DEMO_STEPS.map((s, idx) => (
               <button
                 key={idx}
                 onClick={() => setActiveStep(idx)}
-                className={`p-3 text-left transition-colors border-r border-gray-800 last:border-r-0 ${
-                  activeStep === idx 
-                    ? 'bg-[#222222] text-white font-bold border-b-2 border-b-white' 
-                    : 'text-gray-400 hover:text-gray-200'
+                className={`py-2 px-3 rounded-xl text-[11px] font-bold uppercase tracking-wider text-left transition-all ${
+                  activeStep === idx
+                    ? 'clay-btn-primary'
+                    : 'clay-btn text-[var(--clay-text-muted)]'
                 }`}
               >
-                <div className="text-[10px] text-gray-500 mb-0.5">STEP 0{idx + 1}</div>
+                <div className="text-[9px] opacity-70">Step 0{idx + 1}</div>
                 <div className="truncate">{s.title.split('. ')[1]}</div>
               </button>
             ))}
           </div>
 
-          {/* Terminal Body */}
-          <div className="p-5 font-mono text-xs space-y-4">
-            <div className="flex items-center space-x-2 text-gray-400">
-              <span className="text-emerald-400 font-bold">$</span>
-              <span className="text-gray-100">{step.command}</span>
+          {/* Recessed Clay Terminal Code Body */}
+          <div className="p-5 sm:p-6 rounded-2xl clay-inset font-mono text-xs sm:text-sm text-[var(--clay-text-primary)] space-y-4">
+            <div>
+              <span className="text-[var(--clay-accent)] font-bold select-none">$ </span>
+              <span className="font-semibold text-[var(--clay-text-primary)]">{step.command}</span>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#0b0b0b] border border-gray-800/80 text-gray-300 whitespace-pre-wrap leading-relaxed font-mono">
+            <pre className="whitespace-pre-wrap text-xs text-[var(--clay-text-secondary)] leading-relaxed overflow-x-auto bg-black/10 dark:bg-black/30 p-4 rounded-xl">
               {step.output}
+            </pre>
+          </div>
+
+          {/* Terminal Footer with Explanation & Play Next Controls */}
+          <div className="mt-4 p-3.5 rounded-2xl clay-inset flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+            <div className="flex items-center space-x-2 text-[var(--clay-text-secondary)]">
+              {step.type === 'terminal' && <FileCode className="w-4 h-4 text-[var(--clay-accent)]" />}
+              {step.type === 'security' && <ShieldCheck className="w-4 h-4 text-emerald-500" />}
+              {step.type === 'test' && <CheckCircle2 className="w-4 h-4 text-indigo-400" />}
+              {step.type === 'vision' && <Eye className="w-4 h-4 text-amber-500" />}
+              <span className="leading-snug">{step.detail}</span>
             </div>
 
-            {/* Step Explanation Callout */}
-            <div className="p-3 rounded-lg bg-[#222222] border border-gray-700 flex items-start space-x-2.5 text-xs text-gray-200">
-              {step.type === 'vision' ? (
-                <Eye className="w-4 h-4 text-gray-300 shrink-0 mt-0.5" />
-              ) : step.type === 'security' ? (
-                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-              ) : (
-                <FileCode className="w-4 h-4 text-gray-300 shrink-0 mt-0.5" />
-              )}
-              <div>
-                <span className="font-bold text-white mr-1.5">{step.title}:</span>
-                <span className="text-gray-300">{step.detail}</span>
-              </div>
+            <div className="flex items-center space-x-2 shrink-0">
+              <button
+                onClick={reset}
+                className="p-2 rounded-full clay-btn text-[var(--clay-text-muted)] hover:text-[var(--clay-text-primary)]"
+                title="Reset agent simulation"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+              </button>
+
+              <button
+                onClick={nextStep}
+                className="px-4 py-1.5 clay-btn-primary text-xs font-bold uppercase tracking-wider flex items-center space-x-1.5"
+              >
+                <span>{activeStep === DEMO_STEPS.length - 1 ? 'Start Over' : 'Next Step'}</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
             </div>
-
           </div>
 
-        </div>
-
-        {/* Key Coding Features List */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-          <div className="p-5 rounded-2xl bg-[#ffffff] border border-gray-200">
-            <h4 className="font-bold text-sm text-[#111] mb-1.5 flex items-center space-x-2">
-              <span className="w-2 h-2 rounded-full bg-[#1b1b1b]"></span>
-              <span>Vision in the Loop</span>
-            </h4>
-            <p className="text-gray-500 leading-relaxed">
-              Fable 5.1 inspects rendered browsers, Figma mocks, and UI components in real-time, catching CSS alignment and visual defects before deployment.
-            </p>
-          </div>
-
-          <div className="p-5 rounded-2xl bg-[#ffffff] border border-gray-200">
-            <h4 className="font-bold text-sm text-[#111] mb-1.5 flex items-center space-x-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-600"></span>
-              <span>60% Fewer False Positives</span>
-            </h4>
-            <p className="text-gray-500 leading-relaxed">
-              Calibrated classifiers differentiate between benign security audits (e.g. penetration tests, auth refactors) and harmful exploit scripts.
-            </p>
-          </div>
-
-          <div className="p-5 rounded-2xl bg-[#ffffff] border border-gray-200">
-            <h4 className="font-bold text-sm text-[#111] mb-1.5 flex items-center space-x-2">
-              <span className="w-2 h-2 rounded-full bg-gray-500"></span>
-              <span>Multi-Day Autonomous Jobs</span>
-            </h4>
-            <p className="text-gray-500 leading-relaxed">
-              Designed to execute as a managed background agent across dozens of integrated enterprise toolchains and CLI environments.
-            </p>
-          </div>
         </div>
 
       </div>
